@@ -3,9 +3,11 @@ package com.stripe.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
+import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class PlanTest extends BaseStripeTest {
@@ -31,5 +33,14 @@ public class PlanTest extends BaseStripeTest {
     assertNotNull(product);
     assertNotNull(product.getId());
     assertEquals(plan.getProduct(), product.getId());
+  }
+
+  @Test
+  public void testDeserializeDecimalString() throws Exception {
+    final String data = "{\"amount_precise\": \"0.000000123\"}";
+    final Plan plan = ApiResource.GSON.fromJson(data, Plan.class);
+    assertNotNull(plan);
+    assertNotNull(plan.getAmountPrecise());
+    assertTrue(new BigDecimal("0.000000123").equals(plan.getAmountPrecise()));
   }
 }

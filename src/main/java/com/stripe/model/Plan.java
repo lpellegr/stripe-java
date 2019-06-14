@@ -11,6 +11,7 @@ import com.stripe.param.PlanCreateParams;
 import com.stripe.param.PlanListParams;
 import com.stripe.param.PlanRetrieveParams;
 import com.stripe.param.PlanUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -38,6 +39,9 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** The amount in %s to be charged on the interval specified. */
   @SerializedName("amount")
   Long amount;
+
+  @SerializedName("amount_precise")
+  BigDecimal amountPrecise;
 
   /**
    * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit`

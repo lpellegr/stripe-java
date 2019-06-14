@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,9 @@ public class PlanCreateParams extends ApiRequestParams {
    */
   @SerializedName("amount")
   Long amount;
+
+  @SerializedName("amount_precise")
+  BigDecimal amountPrecise;
 
   /**
    * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit`
@@ -138,6 +142,7 @@ public class PlanCreateParams extends ApiRequestParams {
       Boolean active,
       AggregateUsage aggregateUsage,
       Long amount,
+      BigDecimal amountPrecise,
       BillingScheme billingScheme,
       String currency,
       List<String> expand,
@@ -156,6 +161,7 @@ public class PlanCreateParams extends ApiRequestParams {
     this.active = active;
     this.aggregateUsage = aggregateUsage;
     this.amount = amount;
+    this.amountPrecise = amountPrecise;
     this.billingScheme = billingScheme;
     this.currency = currency;
     this.expand = expand;
@@ -183,6 +189,8 @@ public class PlanCreateParams extends ApiRequestParams {
     private AggregateUsage aggregateUsage;
 
     private Long amount;
+
+    private BigDecimal amountPrecise;
 
     private BillingScheme billingScheme;
 
@@ -220,6 +228,7 @@ public class PlanCreateParams extends ApiRequestParams {
           this.active,
           this.aggregateUsage,
           this.amount,
+          this.amountPrecise,
           this.billingScheme,
           this.currency,
           this.expand,
@@ -261,6 +270,11 @@ public class PlanCreateParams extends ApiRequestParams {
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
+      return this;
+    }
+
+    public Builder setAmountPrecise(BigDecimal amountPrecise) {
+      this.amountPrecise = amountPrecise;
       return this;
     }
 
